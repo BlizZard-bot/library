@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/59943ffdf9.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="library.js" defer></script>
+  </head>
+  <body class="light-mode">
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-book-open"></i> My Virtual Library</h1>
+        <div class="mode-toggle">
+          <div class="mode"><i class="fas fa-sun light-toggle"></i></div>
+          <div class="mode"><i class="far fa-moon dark-toggle"></i></div>
+        </div>
+      </header>
+    </div>
+    <main>
+      <div class="grid container">
+        <div class="grid-item">
+          <span class="delete-book">+</span>
+          <h2 class="book-title">The Hunger Games: Catching Fire</h2>
+          <p>By: <span class="author-name">Suzanne Collins</span></p>
+          <p>Number of pages: <span class="page-number">439</span></p>
+          <p>Language: <span class="language">English</span></p>
+          <p>Published: <span class="published-date">September 1 2009</span></p>
+          <div class="reading-toggle">
+            <span class="reading-status">Read</span>
+            <input type="checkbox" id="switch-one" checked />
+            <label for="switch-one"></label>
+          </div>
+        </div>
+        <div class="grid-item">
+          <span class="delete-book">+</span>
+          <h2 class="book-title">Harry Potter And The Order Of The Phoenix</h2>
+          <p>By: <span class="author-name">J.K. Rowling</span></p>
+          <p>Number of pages: <span class="page-number">802</span></p>
+          <p>Language: <span class="language">English</span></p>
+          <p>Published: <span class="published-date">June 21 2003</span></p>
+          <div class="reading-toggle">
+            <span class="reading-status">Read</span>
+            <input type="checkbox" id="switch-two" checked />
+            <label for="switch-two"></label>
+          </div>
+        </div>
+        <div class="grid-item">
+          <span class="delete-book">+</span>
+          <h2 class="book-title">A Game Of Thrones</h2>
+          <p>By: <span class="author-name">George R.R. Martin</span></p>
+          <p>Number of pages: <span class="page-number">694</span></p>
+          <p>Language: <span class="language">English</span></p>
+          <p>Published: <span class="published-date">July 1 1996</span></p>
+          <div class="reading-toggle">
+            <span class="reading-status">Read</span>
+            <input type="checkbox" id="switch-three" checked />
+            <label for="switch-three"></label>
+          </div>
+        </div>
+      </div>
+      <aside class="stats">
+        <h2>Library Details</h2>
+        <p>Total books: <span class="total-books">3</span></p>
+        <p>Read: <span class="read-books-number">3</span></p>
+        <p>Not read: <span class="unread-books-number">0</span></p>
+        <p class="reading-status-color">
+          Read: <span class="read-books-color"></span>
+        </p>
+        <p class="reading-status-color">
+          Not Read: <span class="unread-books-color"></span>
+        </p>
+        <button class="delete-all-btn">DELETE ALL</button>
+      </aside>
+    </main>
+    <footer>
+      <p>Copyright &copy; 2021 BlizZard</p>
+      <div class="add-book-button">+</div>
+    </footer>
+  </body>
+</html>
