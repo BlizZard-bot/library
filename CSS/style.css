@@ -119,8 +119,11 @@ i {
 main {
   width: 100%;
   display: grid;
-  grid-template-columns: 5fr 1fr;
   align-items: start;
+}
+
+.main {
+  grid-template-columns: 5fr 1fr;
 }
 
 .grid {
@@ -135,6 +138,7 @@ main {
   background-image: linear-gradient(-45deg, #209b87, #80cf7f);
   padding: 3em 2em 1.5em 2em;
   border-radius: 25px;
+  max-width: 500px;
   color: #004141;
   position: relative;
   display: grid;
@@ -219,6 +223,7 @@ label:active:after {
 }
 
 .stats {
+  justify-self: end;
   min-height: 65vh;
   display: grid;
   background-color: #dadada;
@@ -276,6 +281,15 @@ button {
 button:hover,
 button:focus-visible {
   scale: 1.2;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled:hover,
+.disabled:focus-visible {
+  scale: 1;
 }
 
 footer {
