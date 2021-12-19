@@ -1,8 +1,11 @@
 const darkThemeBtn = document.querySelector(".dark-toggle");
 const lightThemeBtn = document.querySelector(".light-toggle");
-const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const checkboxes = document.querySelectorAll(".reading-status-checkbox");
 const deleteBookBtn = document.querySelectorAll(".delete-book");
 const deleteAllBtn = document.querySelector(".delete-all-btn");
+const formSection = document.querySelector(".form-section");
+const displayFormBtn = document.querySelector(".display-popup-button");
+const removeFormBtn = document.querySelector(".remove-form");
 let totalBooksNumber = 3;
 let booksRead = 3;
 let booksNotRead = 0;
@@ -27,23 +30,32 @@ checkboxes.forEach((checkbox) =>
 );
 
 deleteBookBtn.forEach((button) =>
-  button.addEventListener("click", (e) => {
-    button.parentNode.remove();
-    booksRead !== 0 ? (booksRead -= 1) : booksRead;
-    booksNotRead !== 0 ? (booksNotRead -= 1) : booksNotRead;
+  button.addEventListener("click", () => {
+    button.parentElement.remove();
     totalBooksNumber -= 1;
+    if (button.parentElement.lastElementChild.children[1].checked) {
+      booksRead -= 1;
+    } else {
+      booksNotRead -= 1;
+    }
     displayReadingCount();
   })
 );
 
 deleteAllBtn.addEventListener("click", deleteAllBooks);
+displayFormBtn.addEventListener("click", () => {
+  formSection.style.display = "grid";
+});
+removeFormBtn.addEventListener("click", () => {
+  formSection.style.display = "none";
+});
 
 function toggleColor(checkbox) {
   if (checkbox.checked) {
-    checkbox.parentNode.parentNode.style.backgroundImage =
+    checkbox.parentElement.parentElement.style.backgroundImage =
       "linear-gradient(-45deg, #209b87, #80cf7f)";
   } else {
-    checkbox.parentNode.parentNode.style.backgroundImage =
+    checkbox.parentElement.parentElement.style.backgroundImage =
       "linear-gradient(135deg, #e3e3e3, #5d6874)";
   }
 }
