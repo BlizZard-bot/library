@@ -35,62 +35,7 @@
       </header>
     </div>
     <main class="main">
-      <div class="grid container">
-        <div class="grid-item">
-          <span class="delete-btn delete-book">+</span>
-          <h2 class="book-title">The Hunger Games: Catching Fire</h2>
-          <p>By: <span class="author-name">Suzanne Collins</span></p>
-          <p>Number of pages: <span class="page-number">439</span></p>
-          <p>Language: <span class="language">English</span></p>
-          <p>Published: <span class="published-date">September 1 2009</span></p>
-          <div class="reading-toggle">
-            <span class="reading-status-display">Read</span>
-            <input
-              type="checkbox"
-              id="switch-one"
-              checked
-              class="reading-status-checkbox"
-            />
-            <label for="switch-one" class="checkbox-label"></label>
-          </div>
-        </div>
-        <div class="grid-item">
-          <span class="delete-btn delete-book">+</span>
-          <h2 class="book-title">Harry Potter And The Order Of The Phoenix</h2>
-          <p>By: <span class="author-name">J.K. Rowling</span></p>
-          <p>Number of pages: <span class="page-number">802</span></p>
-          <p>Language: <span class="language">English</span></p>
-          <p>Published: <span class="published-date">June 21 2003</span></p>
-          <div class="reading-toggle">
-            <span class="reading-status-display">Read</span>
-            <input
-              type="checkbox"
-              id="switch-two"
-              checked
-              class="reading-status-checkbox"
-            />
-            <label for="switch-two" class="checkbox-label"></label>
-          </div>
-        </div>
-        <div class="grid-item">
-          <span class="delete-btn delete-book">+</span>
-          <h2 class="book-title">A Game Of Thrones</h2>
-          <p>By: <span class="author-name">George R.R. Martin</span></p>
-          <p>Number of pages: <span class="page-number">694</span></p>
-          <p>Language: <span class="language">English</span></p>
-          <p>Published: <span class="published-date">July 1 1996</span></p>
-          <div class="reading-toggle">
-            <span class="reading-status-display">Read</span>
-            <input
-              type="checkbox"
-              id="switch-three"
-              checked
-              class="reading-status-checkbox"
-            />
-            <label for="switch-three" class="checkbox-label"></label>
-          </div>
-        </div>
-      </div>
+      <div class="grid container"></div>
       <aside class="stats">
         <h2>Library Details</h2>
         <p>Total books: <span class="total-books">3</span></p>
@@ -104,14 +49,14 @@
         </p>
         <button class="delete-all-btn">DELETE ALL</button>
       </aside>
+      <div class="display-popup-button">+</div>
     </main>
     <footer>
       <p>Copyright &copy; 2021 BlizZard</p>
-      <div class="display-popup-button">+</div>
     </footer>
 
-    <section class="form-section" style="display: none">
-      <form action="#">
+    <section class="form-section">
+      <form>
         <span class="delete-btn remove-form">+</span>
         <h2 class="form-heading">Add New Book</h2>
         <label for="title"
@@ -141,11 +86,11 @@
         </label>
         <label for="reading-status" class="reading-status">
           Have you read this book?
-          <input required type="checkbox" id="reading-status" />
+          <input type="checkbox" id="reading-status" />
         </label>
         <div class="btn-container">
-          <button class="add-book-btn">Add Book</button>
-          <button>Clear Fields</button>
+          <button class="add-book-btn" type="submit">Add Book</button>
+          <button class="clear-form-btn">Clear Fields</button>
         </div>
       </form>
     </section>
