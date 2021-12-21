@@ -34,7 +34,7 @@ body {
   position: relative;
   font-family: "Roboto";
   display: grid;
-  padding: 2em 2em 0 2em;
+  padding: 2em 1.5em 0 1.5em;
   background-color: var(--bg-body);
   color: rgb(var(--color-main));
 }
@@ -83,8 +83,8 @@ header {
   position: absolute;
   width: 80px;
   height: 50px;
-  right: 1em;
-  top: 1em;
+  right: 0.75em;
+  top: 0.5em;
   border-radius: 10px;
   display: flex;
   gap: 1px;
@@ -103,11 +103,13 @@ header {
 
 .fa-sun {
   color: var(--color-sun);
+  background: transparent;
 }
 
 .fa-moon {
   color: var(--color-moon);
   transform: rotate(-25deg);
+  background: transparent;
 }
 
 i {
@@ -120,6 +122,8 @@ main {
   width: 100%;
   display: grid;
   align-items: start;
+  place-content: center;
+  gap: 2em;
 }
 
 .main {
@@ -137,7 +141,7 @@ main {
 .grid-item {
   padding: 3em 2em 1.5em 2em;
   border-radius: 25px;
-  max-width: 500px;
+  max-width: 480px;
   color: #004141;
   position: relative;
   display: grid;
@@ -222,8 +226,9 @@ label:active:after {
 }
 
 .stats {
-  justify-self: end;
-  min-height: 65vh;
+  justify-self: start;
+  min-height: 60vh;
+  min-width: 220px;
   display: grid;
   border-radius: 25px;
   padding: 1.5em 2em 1em 2em;
@@ -316,8 +321,8 @@ footer p {
   place-content: center;
   font-size: 2.2rem;
   position: fixed;
-  right: 0.65em;
-  bottom: 0.5em;
+  right: 0.25em;
+  bottom: 0.25em;
   color: #fff;
   cursor: pointer;
   transition: 0.15s all;
@@ -357,7 +362,7 @@ form {
   width: max-content;
   background-color: var(--bg-tertiary);
   overflow-x: hidden;
-  padding: 2em 2.5em 1.5em 2.5em;
+  padding: 2em 2em 1.5em 2em;
   border-radius: 10px;
 }
 
@@ -403,4 +408,26 @@ input:focus-visible {
 .btn-container button {
   background-color: rgba(var(--color-main), 0.7);
   color: var(--bg-body);
+}
+
+@media (max-width: 550px) {
+  html {
+    font-size: 0.8rem;
+  }
+  .stats {
+    min-height: 40vh;
+    grid-row: 1/2;
+    width: min(60%, 250px);
+    justify-self: center;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 1.2rem;
+  }
 }
