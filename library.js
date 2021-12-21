@@ -1,13 +1,43 @@
 const darkThemeBtn = document.querySelector(".dark-toggle");
 const lightThemeBtn = document.querySelector(".light-toggle");
-const checkboxes = document.querySelectorAll(".reading-status-checkbox");
-const deleteBookBtn = document.querySelectorAll(".delete-book");
 const deleteAllBtn = document.querySelector(".delete-all-btn");
-const formSection = document.querySelector(".form-section");
 const displayFormBtn = document.querySelector(".display-popup-button");
-const removeFormBtn = document.querySelector(".remove-form");
-let totalBooksNumber = 3;
-let booksRead = 3;
+const form = document.querySelector("form");
+const formSection = document.querySelector(".form-section");
+const booksContainer = document.querySelector(".grid");
+const hideFormBtn = document.querySelector(".remove-form");
+const addBookBtn = document.querySelector(".add-book-btn");
+const clearFormBtn = document.querySelector(".clear-form-btn");
+
+let myLibrary = [
+  {
+    title: "The Hunger Games: Catching Fire",
+    author: "Suzanne Collins",
+    pageCount: 439,
+    language: "English",
+    date: "1 9 2009",
+    read: true,
+  },
+  {
+    title: "Harry Potter And The Order Of The Phoenix",
+    author: "J.K. Rowling",
+    pageCount: 802,
+    language: "English",
+    date: "21 6 2003",
+    read: true,
+  },
+  {
+    title: "A Game Of Thrones",
+    author: "George R.R. Martin",
+    pageCount: 694,
+    language: "English",
+    date: "1 7 1996",
+    read: true,
+  },
+];
+let switchNumber = 1;
+let totalBooksNumber = 0;
+let booksRead = 0;
 let booksNotRead = 0;
 
 darkThemeBtn.addEventListener("click", () => {
@@ -19,36 +49,52 @@ lightThemeBtn.addEventListener("click", () => {
   document.body.classList.add("light-mode");
   document.body.classList.remove("dark-mode");
 });
+function useCheckboxFunctions() {
+  const checkboxes = document.querySelectorAll(".reading-status-checkbox");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", (e) => {
+      toggleColor(checkbox);
+      displayReadingStatus(e.target);
+      changeReadCount(e.target);
+      displayReadingCount();
+    });
+  });
+}
 
-checkboxes.forEach((checkbox) =>
-  checkbox.addEventListener("click", (e) => {
-    toggleColor(e.target);
-    displayReadingStatus(e.target);
-    changeReadCount(e.target);
-    displayReadingCount();
-  })
-);
-
-deleteBookBtn.forEach((button) =>
-  button.addEventListener("click", () => {
-    button.parentElement.remove();
-    totalBooksNumber -= 1;
-    if (button.parentElement.lastElementChild.children[1].checked) {
-      booksRead -= 1;
-    } else {
-      booksNotRead -= 1;
-    }
-    displayReadingCount();
-  })
-);
+function deleteBook() {
+  const deleteBookBtn = Array.from(document.querySelectorAll(".delete-book"));
+  deleteBookBtn.forEach((button) =>
+    button.addEventListener("click", () => {
+      button.parentElement.remove();
+      totalBooksNumber -= 1;
+      if (button.parentElement.lastElementChild.children[1].checked) {
+        booksRead -= 1;
+      } else {
+        booksNotRead -= 1;
+      }
+      displayReadingCount();
+    })
+  );
+}
 
 deleteAllBtn.addEventListener("click", deleteAllBooks);
 displayFormBtn.addEventListener("click", () => {
   formSection.style.display = "grid";
 });
-removeFormBtn.addEventListener("click", () => {
+hideFormBtn.addEventListener("click", () => {
   formSection.style.display = "none";
 });
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBook();
+  useCheckboxFunctions();
+  deleteBook();
+  clearForm();
+  formSection.style.display = "none";
+});
+
+clearFormBtn.addEventListener("click", clearForm);
 
 function toggleColor(checkbox) {
   if (checkbox.checked) {
@@ -88,7 +134,6 @@ function displayReadingCount() {
 }
 
 function deleteAllBooks() {
-  const booksContainer = document.querySelector(".grid");
   const main = document.querySelector("main");
   let shouldDelete = confirm("Do you really want to delete all the books");
   if (shouldDelete) {
@@ -96,21 +141,122 @@ function deleteAllBooks() {
     deleteAllBtn.disabled = true;
     deleteAllBtn.classList.add("disabled");
     main.classList.remove("main");
+    totalBooksNumber = 0;
+    booksRead = 0;
+    booksNotRead = 0;
+    displayReadingCount();
   }
 }
 
-function Book(title, author, pageCount, read) {
+function clearForm() {
+  form.reset();
+}
+
+function Book(title, author, pageCount, language, publishingDate, read) {
   this.title = title;
   this.author = author;
   this.pageCount = pageCount;
+  this.language = language;
+  this.date = publishingDate;
   this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pageCount} pages, ${this.read}`;
-  };
 }
 
-const book1 = new Book("Hard Times", "Charles Dickens", 319, "Read");
-console.log(book1.info());
+function addBook() {
+  totalBooksNumber = 0;
+  booksNotRead = 0;
+  booksRead = 0;
+  let bookTitle = document.querySelector("#title").value;
+  let bookAuthor = document.querySelector("#author").value;
+  let numberOfPages = document.querySelector("#page-number").value;
+  let language = document.querySelector("#language").value;
+  let publishingDateInput = document.querySelector("#publishing-date");
+  let publishingDate = publishingDateInput.value.split("-").reverse().join(" ");
+  let readingStatus = document.querySelector("#reading-status").checked;
+  let newBookObj = new Book(
+    bookTitle,
+    bookAuthor,
+    numberOfPages,
+    language,
+    publishingDate,
+    readingStatus
+  );
+  myLibrary.push(newBookObj);
+  displayBook();
+  displayReadingCount();
+}
 
-// To get proper date from date input field
-// let val = date.value.split("-").reverse().join("-");
+function displayBook() {
+  while (booksContainer.firstChild) {
+    booksContainer.removeChild(booksContainer.firstChild);
+  }
+  for (let i in myLibrary) {
+    const book = document.createElement("div");
+    const deleteButton = document.createElement("span");
+    const bookTitle = document.createElement("h2");
+    const author = document.createElement("p");
+    const authorName = document.createElement("span");
+    const pages = document.createElement("p");
+    const pageNumberDisplay = document.createElement("span");
+    const lang = document.createElement("p");
+    const langDisplay = document.createElement("span");
+    const published = document.createElement("p");
+    const publishedDate = document.createElement("span");
+    const toggle = document.createElement("div");
+    const readingStatusDisplay = document.createElement("span");
+    const checkbox = document.createElement("input");
+    const label = document.createElement("label");
+
+    book.classList.add("grid-item");
+    deleteButton.classList.add("delete-btn", "delete-book");
+    toggle.classList.add("reading-toggle");
+    readingStatusDisplay.classList.add("reading-status-display");
+    checkbox.classList.add("reading-status-checkbox");
+    label.classList.add("checkbox-label");
+
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id", `switch${switchNumber}`);
+    label.setAttribute("for", checkbox.getAttribute("id"));
+    switchNumber += 1;
+
+    deleteButton.textContent = "+";
+    bookTitle.textContent = myLibrary[i].title;
+    author.textContent = "By: ";
+    authorName.textContent = myLibrary[i].author;
+    pages.textContent = "Number of pages: ";
+    pageNumberDisplay.textContent = myLibrary[i].pageCount;
+    lang.textContent = "Language: ";
+    langDisplay.textContent = myLibrary[i].language;
+    published.textContent = "Published: ";
+    publishedDate.textContent = myLibrary[i].date;
+    readingStatusDisplay.textContent = "Read";
+    if (myLibrary[i].read) {
+      checkbox.setAttribute("checked", "");
+    } else {
+      checkbox.setAttribute("unchecked", "");
+    }
+    checkbox.checked ? (booksRead += 1) : (booksNotRead += 1);
+
+    author.appendChild(authorName);
+    pages.appendChild(pageNumberDisplay);
+    lang.appendChild(langDisplay);
+    published.appendChild(publishedDate);
+    toggle.append(readingStatusDisplay, checkbox, label);
+    book.appendChild(toggle);
+    book.append(
+      deleteButton,
+      bookTitle,
+      author,
+      pages,
+      lang,
+      published,
+      toggle
+    );
+    booksContainer.appendChild(book);
+    toggleColor(checkbox);
+    totalBooksNumber += 1;
+  }
+}
+
+displayBook();
+useCheckboxFunctions();
+deleteBook();
