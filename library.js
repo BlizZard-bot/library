@@ -72,6 +72,15 @@ function deleteBook() {
       } else {
         booksNotRead -= 1;
       }
+      for (let i in myLibrary) {
+        if (
+          button.parentElement.querySelector(".author-name").textContent ===
+          myLibrary[i].author
+        ) {
+          const index = myLibrary.indexOf(myLibrary[i]);
+          myLibrary.splice(index, 1);
+        }
+      }
       displayReadingCount();
     })
   );
@@ -212,6 +221,7 @@ function displayBook() {
     readingStatusDisplay.classList.add("reading-status-display");
     checkbox.classList.add("reading-status-checkbox");
     label.classList.add("checkbox-label");
+    authorName.classList.add("author-name");
 
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", `switch${switchNumber}`);
