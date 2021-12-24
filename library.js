@@ -146,10 +146,11 @@ function deleteAllBooks() {
   const main = document.querySelector("main");
   let shouldDelete = confirm("Do you really want to delete all the books");
   if (shouldDelete) {
-    booksContainer.remove();
+    while (booksContainer.lastElementChild) {
+      booksContainer.removeChild(booksContainer.lastElementChild);
+    }
     deleteAllBtn.disabled = true;
     deleteAllBtn.classList.add("disabled");
-    main.classList.remove("main");
     totalBooksNumber = 0;
     booksRead = 0;
     booksNotRead = 0;
