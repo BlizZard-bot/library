@@ -152,13 +152,15 @@ function clearForm() {
   form.reset();
 }
 
-function Book(title, author, pageCount, language, publishingDate, read) {
-  this.title = title;
-  this.author = author;
-  this.pageCount = pageCount;
-  this.language = language;
-  this.date = publishingDate;
-  this.read = read;
+class Book {
+  constructor(title, author, pageCount, language, publishingDate, read) {
+    this.title = title;
+    this.author = author;
+    this.pageCount = pageCount;
+    this.language = language;
+    this.date = publishingDate;
+    this.read = read;
+  }
 }
 
 function addBook() {
