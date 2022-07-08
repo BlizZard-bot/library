@@ -115,19 +115,17 @@ header {
 i {
   color: transparent;
   background-clip: text;
+  -webkit-background-clip: text;
   background-image: linear-gradient(to bottom right, #278ce4, #0f5daa);
 }
 
 main {
   width: 100%;
   display: grid;
+  grid-template-columns: 5fr 1fr;
   align-items: start;
   place-content: center;
   gap: 2em;
-}
-
-.main {
-  grid-template-columns: 5fr 1fr;
 }
 
 .grid {
@@ -226,7 +224,6 @@ label:active:after {
 }
 
 .stats {
-  justify-self: start;
   min-height: 60vh;
   min-width: 220px;
   display: grid;
@@ -287,7 +284,7 @@ button {
 
 button:hover,
 button:focus-visible {
-  scale: 1.2;
+  transform: scale(1.2);
 }
 
 .disabled {
@@ -296,7 +293,7 @@ button:focus-visible {
 
 .disabled:hover,
 .disabled:focus-visible {
-  scale: 1;
+  transform: scale(1);
 }
 
 footer {
@@ -421,7 +418,7 @@ input:focus-visible {
     justify-self: center;
   }
 
-  .main {
+  main {
     grid-template-columns: 1fr;
   }
 }
